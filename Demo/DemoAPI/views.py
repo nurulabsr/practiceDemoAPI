@@ -12,6 +12,10 @@ from rest_framework import status
 def DemoItems(request):
     if request.method == 'GET':
         items = DemoModel.objects.all()
+        title = request.GET.get('title')
+        if title:
+            items = items.filter(title=title)
+            
         serializers_item = DemoSerializer(items, many=True)
         return Response(serializers_item.data)
     
