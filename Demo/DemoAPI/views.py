@@ -13,9 +13,15 @@ def DemoItems(request):
     if request.method == 'GET':
         items = DemoModel.objects.all()
         title = request.GET.get('title')
+        price = request.GET.get('price')
+        description = request.GET.get('description')
+        
         if title:
             items = items.filter(title__icontains=title)
-            
+        if price:
+            items = items.filter(price__icontains=price)
+        if description:
+            items = items.filter(description__icontains=description)  
             
         serializers_item = DemoSerializer(items, many=True)
         return Response(serializers_item.data)
