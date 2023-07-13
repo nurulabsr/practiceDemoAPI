@@ -23,12 +23,12 @@ def DemoItems(request):
             items = items.filter(price__icontains=price)
         if description:
             items = items.filter(description__icontains=description)  
-        # ----------end same method----------------
-        # ----------start ordering-----------------
+        # __________end same method_______________
+        # __________start ordering________________
         ordering = request.GET.get('ordering')
         if ordering:
            items = items.order_by(ordering)
-            
+        # __________End Ordering__________________
         serializers_item = DemoSerializer(items, many=True)
         return Response(serializers_item.data)
     
