@@ -12,16 +12,22 @@ from rest_framework import status
 def DemoItems(request):
     if request.method == 'GET':
         items = DemoModel.objects.all()
-        search = request.GET.get('search')
+        # -----------same method (start searching) ---------------
+        search_variable = request.GET.get('search')  # ?search 
         price = request.GET.get('price')
         description = request.GET.get('description')
         
-        if search:
-            items = items.filter(title__icontains=search)
+        if search_variable:
+            items = items.filter(title__icontains=search_variable)
         if price:
             items = items.filter(price__icontains=price)
         if description:
             items = items.filter(description__icontains=description)  
+        # ----------end same method----------------
+        # ----------start ordering-----------------
+        ordering = request.GET.get('ordering')
+        if ordering:
+           items = items.order_by(ordering)
             
         serializers_item = DemoSerializer(items, many=True)
         return Response(serializers_item.data)
