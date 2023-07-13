@@ -14,7 +14,7 @@ def DemoItems(request):
         items = DemoModel.objects.all()
         title = request.GET.get('title')
         if title:
-            items = items.filter(title=title)
+            items = items.filter(title__icontains=title)
             
             
         serializers_item = DemoSerializer(items, many=True)
