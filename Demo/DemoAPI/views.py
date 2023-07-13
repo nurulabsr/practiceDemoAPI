@@ -16,6 +16,7 @@ def DemoItems(request):
         if title:
             items = items.filter(title=title)
             
+            
         serializers_item = DemoSerializer(items, many=True)
         return Response(serializers_item.data)
     
