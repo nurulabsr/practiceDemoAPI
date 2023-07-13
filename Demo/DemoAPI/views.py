@@ -12,12 +12,12 @@ from rest_framework import status
 def DemoItems(request):
     if request.method == 'GET':
         items = DemoModel.objects.all()
-        title = request.GET.get('title')
+        search = request.GET.get('search')
         price = request.GET.get('price')
         description = request.GET.get('description')
         
-        if title:
-            items = items.filter(title__icontains=title)
+        if search:
+            items = items.filter(title__icontains=search)
         if price:
             items = items.filter(price__icontains=price)
         if description:
