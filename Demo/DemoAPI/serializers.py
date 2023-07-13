@@ -6,6 +6,6 @@ from .models import DemoModel
 class DemoSerializer(serializers.ModelSerializer):
     class Meta:
         model = DemoModel
-        # field = ['id', 'price', 'description']
-        fields = '__all__'
+        fields = ['id', 'title', 'price', 'description']
+        # fields = '__all__'
         
